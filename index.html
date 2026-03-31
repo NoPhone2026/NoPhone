@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoPhone — Coming Soon</title>
+  <meta name="description" content="The NoPhone. Zero apps. Zero notifications. Zero screen time. Sign up to be the first to know when we're back.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+      color: #fff;
+      background: #000;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      line-height: 1.5;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 100px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .signup-form input {
+      flex: 1;
+      padding: 14px 24px;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      min-width: 0;
+    }
+
+    .signup-form input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .signup-form button {
+      padding: 14px 28px;
+      border: none;
+      background: #fff;
+      color: #000;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .signup-form button:hover {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    @media (max-width: 480px) {
+      .signup-form {
+        flex-direction: column;
+        border-radius: 16px;
+      }
+
+      .signup-form input {
+        padding: 16px 20px;
+        text-align: center;
+      }
+
+      .signup-form button {
+        padding: 16px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <video autoplay muted loop playsinline>
+      <source src="nophone.webm" type="video/webm">
+    </video>
+    <div class="hero-content">
+      <h1 class="logo">The NoPhone</h1>
+      <p class="tagline">Something new is coming.<br>Sign up to be the first to know.</p>
+      <form class="signup-form" action="#" method="POST">
+        <input type="email" name="email" placeholder="Your email" required>
+        <button type="submit">Notify me</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
