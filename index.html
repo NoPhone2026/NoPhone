@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NoPhone — Coming Soon</title>
   <meta name="description" content="The NoPhone. Zero apps. Zero notifications. Zero screen time. Sign up to be the first to know when we're back.">
+  <link rel="canonical" href="https://www.thenophone.com">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.thenophone.com">
+  <meta property="og:title" content="The NoPhone — Coming Soon">
+  <meta property="og:description" content="Zero apps. Zero notifications. Zero screen time. Sign up to be the first to know.">
+  <meta property="og:image" content="https://www.thenophone.com/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The NoPhone — Coming Soon">
+  <meta name="twitter:description" content="Zero apps. Zero notifications. Zero screen time. Sign up to be the first to know.">
+  <meta name="twitter:image" content="https://www.thenophone.com/og-image.jpg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -52,7 +63,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
+      gap: 12px;
       padding: 24px;
       text-align: center;
     }
@@ -83,6 +94,11 @@
       color: rgba(255, 255, 255, 0.6);
       max-width: 400px;
       line-height: 1.5;
+    }
+
+    .signup-form,
+    .signup-success {
+      margin-top: 28px;
     }
 
     .signup-form {
@@ -157,6 +173,25 @@
       max-width: 420px;
     }
 
+    .privacy-link {
+      position: fixed;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .privacy-link a {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+    }
+
+    .privacy-link a:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
     @media (max-width: 480px) {
       .signup-form {
         flex-direction: column;
@@ -177,8 +212,9 @@
 </head>
 <body>
   <section class="hero">
-    <video autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline webkit-playsinline id="bg-video">
       <source src="nophone.webm" type="video/webm">
+      <source src="nophone.mp4" type="video/mp4">
     </video>
     <div class="hero-content">
       <span class="badge">Coming Soon</span>
@@ -192,6 +228,7 @@
       <p class="signup-error" id="signup-error" style="display:none"></p>
     </div>
   </section>
+  <div class="privacy-link"><a href="/privacy.html">Privacy Policy</a></div>
   <script>
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -228,6 +265,14 @@
       script.src = url;
       document.body.appendChild(script);
     });
+
+    var video = document.getElementById('bg-video');
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari) {
+      video.innerHTML = '<source src="nophone.mp4" type="video/mp4">';
+      video.load();
+      video.play();
+    }
   </script>
 </body>
 </html>
