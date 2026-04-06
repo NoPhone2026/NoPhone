@@ -57,8 +57,23 @@
       text-align: center;
     }
 
+    .badge {
+      display: inline-block;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
     .logo {
-      font-size: clamp(32px, 6vw, 56px);
+      font-size: clamp(48px, 10vw, 96px);
       font-weight: 700;
       letter-spacing: -0.02em;
     }
@@ -114,6 +129,34 @@
       background: rgba(255, 255, 255, 0.85);
     }
 
+    .signup-form button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .signup-success {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 420px;
+      padding: 14px 24px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .signup-error {
+      font-size: 13px;
+      color: #ff6b6b;
+      max-width: 420px;
+    }
+
     @media (max-width: 480px) {
       .signup-form {
         flex-direction: column;
@@ -138,13 +181,53 @@
       <source src="nophone.webm" type="video/webm">
     </video>
     <div class="hero-content">
+      <span class="badge">Coming Soon</span>
       <h1 class="logo">The NoPhone</h1>
       <p class="tagline">Something new is coming.<br>Sign up to be the first to know.</p>
-      <form class="signup-form" action="#" method="POST">
-        <input type="email" name="email" placeholder="Your email" required>
-        <button type="submit">Notify me</button>
+      <form class="signup-form" id="signup-form">
+        <input type="email" name="EMAIL" id="email-input" placeholder="Your email" required>
+        <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_ee0e209d501deee51402b8f68_8b1f44b705" tabindex="-1" value=""></div>
+        <button type="submit" id="submit-btn">Notify me</button>
       </form>
+      <p class="signup-error" id="signup-error" style="display:none"></p>
     </div>
   </section>
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('email-input').value;
+      var btn = document.getElementById('submit-btn');
+      var form = this;
+      var errorEl = document.getElementById('signup-error');
+
+      btn.disabled = true;
+      btn.textContent = '...';
+      errorEl.style.display = 'none';
+
+      var url = 'https://thenophone.us2.list-manage.com/subscribe/post-json?u=ee0e209d501deee51402b8f68&id=8b1f44b705&f_id=00c1c4e1f0&EMAIL=' + encodeURIComponent(email) + '&c=mc_callback';
+
+      window.mc_callback = function(data) {
+        if (data.result === 'success') {
+          form.outerHTML = '<div class="signup-success">You\'re on the list!</div>';
+        } else {
+          var msg = data.msg || 'Something went wrong. Please try again.';
+          if (msg.includes('already subscribed')) {
+            msg = 'You\'re already on the list!';
+          }
+          errorEl.textContent = msg.replace(/<[^>]*>/g, '');
+          errorEl.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Notify me';
+        }
+        var script = document.getElementById('mc-script');
+        if (script) script.remove();
+      };
+
+      var script = document.createElement('script');
+      script.id = 'mc-script';
+      script.src = url;
+      document.body.appendChild(script);
+    });
+  </script>
 </body>
 </html>
